@@ -11,6 +11,15 @@ $(function() {
 	var snake;
 	var frameStep, timeStep, currTime;
 	var gameRunning = false;
+	var beep = document.createElement('audio'),
+		gameover = document.createElement('audio');
+	if (!!(beep.canPlayType && beep.canPlayType('audio/mpeg;').replace(/no/, ''))) {
+		beep.src = 'beep.mp3';
+		gameover.src = 'gameover.mp3'
+	} else if (!!(beep.canPlayType && beep.canPlayType('audio/ogg; codecs="vorbis"').replace(/no/, ''))) {
+		beep.src = 'beep.ogg';
+		gameover.src = 'gameover.ogg';
+	}
 
 	var showMessage = function(ma, mb) {
 		msg.find('.msg-a').text(ma);
@@ -95,6 +104,7 @@ $(function() {
 		// different outcomes of the move
 		if (nextHead[0] == currentCoin[0] && nextHead[1] == currentCoin[1]) {
 			this.bodyPixels.push(nextHead);
+			beep.play();
 			adjustSpeed(this.bodyPixels.length);
 			if (useNextRandomPixelForCoin()) {
 				return GOOD_MOVE;
@@ -149,6 +159,7 @@ $(function() {
 				if (m === BAD_MOVE) {
 					clearInterval(gameInterval);
 					gameRunning = false;
+					gameover.play();
 					showMessage('你輸了', '按空白鍵再挑戰一次');
 				} else if (m === ACE_MOVE) {
 					clearInterval(gameInterval);
