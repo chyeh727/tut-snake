@@ -163,11 +163,11 @@ var startMainLoop = function() {
                 clearInterval(gameInterval);
                 gameRunning = false;
                 gameover.play();
-                showMessage('你輸了', '按空白鍵再挑戰一次');
+                showMessage('Game Over', 'Press space to start again');
             } else if (m === ACE_MOVE) {
                 clearInterval(gameInterval);
                 gameRunning = false;
-                showMessage("你全破了!", '按空白鍵再挑戰一次');            
+                showMessage("You Won", 'Press space to start again');            
             }
             currTime %= frameStep;
         }
@@ -191,7 +191,7 @@ $(window).keydown(function(e) {
             } else {
                 clearInterval(gameInterval);
                 gameInterval = null;
-                showMessage('暫停中', '');
+                showMessage('Paused', '');
             }
         }
     } else if (k === 38) {
@@ -233,5 +233,4 @@ $(window).keydown(function(e) {
     }
 });
 
-showMessage('貪食蛇', '按空白鍵開始遊戲');
-
+showMessage('Welcome!', 'Press space to start');
