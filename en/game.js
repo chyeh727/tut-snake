@@ -135,7 +135,6 @@ var initializeGame = function() {
     availablePixels = [];
     for (var i = 0; i < dispWidthInPixels; i++) {
         for (var j = 0; j < dispWidthInPixels; j++) {
-            var p = $('<div class="pixel" data-x="' + j + '" data-y="' + i + '"></div>');
             availablePixels.push(i + '|' + j);
         }
     }
@@ -144,10 +143,8 @@ var initializeGame = function() {
     snake.direction = 'l';
     snake.bodyPixels = [];
     for (var i = 29, end = 29 - initialLength; i > end; i--) {
-        (function(x) {
-            tryAllocatingPixel(x, 25);
-            snake.bodyPixels.push([x, 25]);
-        })(i);
+        tryAllocatingPixel(i, 25);
+        snake.bodyPixels.push([i, 25]);
     }
 
     // initialize the coin
